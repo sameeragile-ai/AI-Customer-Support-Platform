@@ -1,0 +1,488 @@
+import { Plan, Addon, Testimonial, FAQItem, ChatMessage } from '../types';
+
+export const INTEGRATIONS = [
+  { name: 'Zendesk', category: 'Helpdesk', logo: 'Ticket' },
+  { name: 'HubSpot', category: 'CRM', logo: 'Layers' },
+  { name: 'Slack', category: 'Internal Chat', logo: 'Hash' },
+  { name: 'Intercom', category: 'Messaging', logo: 'MessageSquare' },
+  { name: 'Shopify', category: 'E-commerce', logo: 'ShoppingBag' },
+  { name: 'Salesforce', category: 'CRM', logo: 'Cloud' },
+  { name: 'Freshdesk', category: 'Helpdesk', logo: 'LifeBuoy' },
+  { name: 'Notion', category: 'Knowledge', logo: 'FileText' },
+  { name: 'Google Drive', category: 'Docs', logo: 'Folder' },
+  { name: 'Confluence', category: 'Knowledge', logo: 'BookOpen' },
+  { name: 'Stripe', category: 'Billing', logo: 'CreditCard' },
+  { name: 'Gmail', category: 'Email', logo: 'Mail' },
+];
+
+export const PLANS: Plan[] = [
+  {
+    id: 'plan-starter',
+    name: 'Starter',
+    priceMonthly: 49,
+    priceYearly: 39, // $39/mo billed yearly (~20% off)
+    description: 'Perfect for early-stage companies and teams getting started with AI support.',
+    conversations: '1,000 AI conversations / mo',
+    features: [
+      '1,000 resolved conversations / mo',
+      '1 knowledge base sync (up to 500 docs)',
+      'Web chat widget with custom theme',
+      'Standard business hours email support',
+      'Email handoff integration',
+      'Weekly resolution analytics',
+    ],
+    ctaText: 'Start with Starter',
+  },
+  {
+    id: 'plan-growth',
+    name: 'Growth',
+    priceMonthly: 199,
+    priceYearly: 159, // $159/mo billed yearly (~20% off)
+    description: 'For growing businesses requiring real-time API actions and full CRM syncing.',
+    conversations: '10,000 AI conversations / mo',
+    popular: true,
+    features: [
+      '10,000 resolved conversations / mo',
+      'Unlimited knowledge sources & syncs',
+      'Real-time API actions (Shopify, Stripe, custom)',
+      'Zendesk, HubSpot & Slack 2-way syncing',
+      'Smart human handoff with full conversation context',
+      'Advanced guardrails & custom hallucination filters',
+      'Audit log with raw source retrieval traces',
+      'Priority live chat support',
+    ],
+    ctaText: 'Start with Growth',
+  },
+  {
+    id: 'plan-scale',
+    name: 'Scale',
+    priceMonthly: 599,
+    priceYearly: 479, // $479/mo billed yearly (~20% off)
+    description: 'For high-volume support operations demanding custom workflows, voice, and SLAs.',
+    conversations: '50,000 AI conversations / mo',
+    features: [
+      '50,000 resolved conversations / mo',
+      'Voice agent private beta access',
+      'Enterprise SAML / Okta SSO',
+      'Custom webhook triggers & middleware',
+      'SOC 2 Type II compliance reports & BAA',
+      'Dedicated Customer Success Manager',
+      '99.9% uptime SLA guarantee',
+      'Custom AI regression test suites',
+    ],
+    ctaText: 'Start with Scale',
+  },
+];
+
+export const ADDONS: Addon[] = [
+  {
+    id: 'addon-voice',
+    name: 'Voice Agent (Beta)',
+    price: 149,
+    billingType: 'monthly',
+    description: 'Sub-350ms ultra-low latency voice support agent with phone number provisioning.',
+    tag: 'Private Beta',
+    iconName: 'Mic',
+  },
+  {
+    id: 'addon-conversations',
+    name: 'Extra 5,000 Conversations',
+    price: 79,
+    billingType: 'monthly',
+    description: 'Additional monthly conversation pool with automatic rollover protection.',
+    tag: 'High Demand',
+    iconName: 'MessageCircle',
+  },
+  {
+    id: 'addon-salesforce',
+    name: 'Salesforce Enterprise Connector',
+    price: 59,
+    billingType: 'monthly',
+    description: 'Bi-directional case routing, contact enrichment, and custom object querying.',
+    iconName: 'Cloud',
+  },
+  {
+    id: 'addon-api-actions',
+    name: 'Custom API Actions Setup',
+    price: 399,
+    billingType: 'one-time',
+    description: 'Our solutions engineering team builds and tests 5 custom endpoint actions.',
+    tag: 'Engineering Service',
+    iconName: 'Code',
+  },
+  {
+    id: 'addon-whitelabel',
+    name: 'White-label Widget',
+    price: 99,
+    billingType: 'monthly',
+    description: 'Remove all Helmora badges, customize CSS fonts, and host on your own domain.',
+    iconName: 'Palette',
+  },
+  {
+    id: 'addon-onboarding',
+    name: 'Priority Onboarding & Audit',
+    price: 249,
+    billingType: 'one-time',
+    description: '1-on-1 architecture call, knowledge base gap audit, and pre-launch benchmark.',
+    tag: 'Fast-Track',
+    iconName: 'Compass',
+  },
+];
+
+export const HERO_DEMO_STEPS: ChatMessage[] = [
+  {
+    id: 'msg-1',
+    sender: 'customer',
+    text: "Hi, my order #48213 hasn't arrived and I need it by Friday.",
+    timestamp: '10:42 AM',
+  },
+  {
+    id: 'msg-2',
+    sender: 'ai',
+    text: 'Checking your order right now.',
+    timestamp: '10:42 AM',
+    intent: 'Order status',
+    confidence: 96,
+    apiAction: {
+      service: 'Shopify API',
+      action: 'orders.lookup(#48213)',
+      status: 'calling',
+    },
+  },
+  {
+    id: 'msg-3',
+    sender: 'ai',
+    text: 'Good news! Your order #48213 is out for delivery today with FedEx Express (tracking #FX-990231). Estimated delivery is between 1:00 PM and 3:30 PM.',
+    timestamp: '10:42 AM',
+    citation: {
+      title: 'Shipping Policy & Transit Times',
+      source: 'help.store.com/shipping-faq',
+    },
+  },
+  {
+    id: 'msg-4',
+    sender: 'customer',
+    text: 'Can I get a refund on the delay? It was promised yesterday.',
+    timestamp: '10:43 AM',
+  },
+  {
+    id: 'msg-5',
+    sender: 'ai',
+    text: "That needs a team member — I've created ticket #ZD-1042 in Zendesk and Sarah will reply within 10 minutes.",
+    timestamp: '10:43 AM',
+    handoff: {
+      ticketId: 'ZD-1042',
+      assignee: 'Sarah M. (Senior Support)',
+      eta: 'Under 10 mins',
+    },
+  },
+];
+
+export const SANDBOX_PRESETS = [
+  {
+    prompt: "What's your refund policy for annual plans after 14 days?",
+    intent: "Billing · Refund policy",
+    confidence: 98,
+    action: "Stripe API · checkSubscriptionAge()",
+    response: "According to section 4.2 of our Terms, annual subscriptions cancelled after 14 days receive a prorated account credit toward future services. Would you like me to calculate your available balance?",
+    citation: "Billing & Terms of Service §4.2",
+    escalated: false,
+  },
+  {
+    prompt: "I need to reset my MFA device, I lost my authenticator app.",
+    intent: "Security · MFA Reset",
+    confidence: 94,
+    action: "Okta API · verifyBackupEmail()",
+    response: "For your security, MFA device resets require identity verification. I have generated a one-time verification link sent to your registered recovery address ending in ***@work.com.",
+    citation: "Account Security Guide · IT Policy",
+    escalated: false,
+  },
+  {
+    prompt: "My server is throwing 502 Bad Gateway during our launch event, help!",
+    intent: "Critical Incident · Downtime",
+    confidence: 99,
+    action: "PagerDuty API · triggerHighSeverity()",
+    response: "I've flagged this as a Priority 1 production incident. On-call engineer Alex K. has been paged and incident room #inc-774 has been created in Slack. ETA for first update is 4 minutes.",
+    citation: "SLA Policy · Severity 1 Matrix",
+    escalated: true,
+  },
+];
+
+export const BENTO_FEATURES = [
+  {
+    id: 'multi-turn',
+    title: 'Understands intent & context',
+    subtitle: 'Maintains conversational state across 20+ turns without forgetting key details or repeating questions.',
+    illustrationType: 'dialogue-tree',
+    tag: 'Core Engine',
+  },
+  {
+    id: 'rag-knowledge',
+    title: 'RAG over your actual knowledge',
+    subtitle: 'Syncs websites, Zendesk articles, Notion workspaces, PDFs, and Confluence. Answers cite the exact line.',
+    illustrationType: 'rag-parser',
+    tag: 'Zero Hallucinations',
+  },
+  {
+    id: 'api-actions',
+    title: 'Takes real business actions',
+    subtitle: 'Performs order lookups, issue refunds, updates subscriber tiers, and books appointments via secure REST APIs.',
+    illustrationType: 'api-runner',
+    tag: 'Full Automation',
+  },
+  {
+    id: 'human-handoff',
+    title: 'Smart human handoff',
+    subtitle: 'Hands off cleanly when confidence dips below your threshold, or when customer sentiment turns frustrated.',
+    illustrationType: 'handoff-flow',
+    tag: 'Graceful Routing',
+  },
+  {
+    id: 'ticket-automation',
+    title: 'Bi-directional ticket sync',
+    subtitle: 'Creates and tags tickets in Zendesk, HubSpot, and Freshdesk, with real-time incident broadcast into Slack.',
+    illustrationType: 'ticket-sync',
+    tag: 'Tool Integration',
+  },
+  {
+    id: 'omnichannel',
+    title: 'One agent across all channels',
+    subtitle: 'Deploy the same brain across web chat, mobile apps, inbound email, and sub-350ms phone calls.',
+    illustrationType: 'omnichannel-preview',
+    tag: 'Chat · Email · Voice',
+  },
+];
+
+export const HOW_IT_WORKS_STEPS = [
+  {
+    step: '01',
+    title: 'Connect your sources',
+    description: 'Point Helmora to your public help center, internal Notion pages, API documentation, or upload raw PDFs. The ingestion pipeline indexes, chunks, and creates vector embeddings in under 3 minutes.',
+    badge: '1-click connect',
+    subFeatures: ['Automatic daily re-indexing', 'Metadata tags & permission scopes', 'Broken link alerts'],
+  },
+  {
+    step: '02',
+    title: 'Set guardrails & actions',
+    description: 'Define what Helmora can do and what it must never say. Set confidence thresholds (default 92%), attach verified API endpoints with JSON schema parameters, and configure VIP routing.',
+    badge: 'No-code policy rules',
+    subFeatures: ['Confidence score thresholds', 'Forbidden topic boundary rules', 'Live test playground & sandbox'],
+  },
+  {
+    step: '03',
+    title: 'Go live everywhere',
+    description: 'Drop a lightweight script tag onto your website or install the Zendesk/HubSpot app. Helmora immediately starts resolving tickets, auto-tagging conversations, and freeing your agents.',
+    badge: 'Zero code embed',
+    subFeatures: ['Under 12KB lightweight bundle', 'Works inside existing Zendesk agent UI', 'Real-time fallback to human chat'],
+  },
+];
+
+export const ACCURACY_COMPARISON = {
+  withoutGuardrails: {
+    userQuery: 'Can I get a 40% discount if I renew early?',
+    response: "Yes absolutely! We can offer you 40% off our annual subscription if you renew today. I've applied the coupon code EARLY40 to your account.",
+    issues: [
+      'Hallucinated nonexistent discount',
+      'Invented coupon code EARLY40',
+      'No source citation or policy check',
+      'Committed company to unauthorized revenue loss',
+    ],
+  },
+  withHelmora: {
+    userQuery: 'Can I get a 40% discount if I renew early?',
+    response: "Our standard early renewal incentive is 15% off for multi-year contracts, per our current 2026 commercial terms. For custom tier negotiations or higher volume discounts, I can connect you directly with your account executive, Marcus.",
+    confidence: 97,
+    sources: [
+      { name: 'Commercial Terms §3.1', verified: true },
+      { name: 'Renewal Discount Matrix (Updated Oct 2026)', verified: true },
+    ],
+    safeguards: [
+      'Answers exclusively from retrieved source chunks',
+      'Strict confidence threshold enforcement',
+      'Real-time validation against unauthorized commitments',
+      'Immediate seamless routing for out-of-bounds requests',
+    ],
+  },
+};
+
+export const DASHBOARD_STATS = {
+  kpis: [
+    { label: 'Conversations', value: '12,480', change: '+18.4%', trend: 'up', subtext: 'Past 30 days' },
+    { label: 'Resolution rate', value: '71.4%', change: '+4.2%', trend: 'up', subtext: 'Target 70%' },
+    { label: 'Avg handle time', value: '1m 52s', change: '-44s', trend: 'down', subtext: 'Down from 6m 12s' },
+    { label: 'Customer CSAT', value: '94.2%', change: '+2.8%', trend: 'up', subtext: '1,420 ratings' },
+  ],
+  intents: [
+    { intent: 'Order Tracking & Logistics', count: 4820, percentage: 38, resolvedRate: 88 },
+    { intent: 'Returns & Exchange Policy', count: 2890, percentage: 23, resolvedRate: 79 },
+    { intent: 'Account Access & 2FA Reset', count: 1940, percentage: 16, resolvedRate: 64 },
+    { intent: 'Billing & Invoice Inquiries', count: 1620, percentage: 13, resolvedRate: 72 },
+    { intent: 'API Integration Inquiries', count: 1210, percentage: 10, resolvedRate: 54 },
+  ],
+  recentConversations: [
+    {
+      id: 'CNV-8821',
+      customer: 'Alex Rivera',
+      company: 'Northwind',
+      query: 'Tracking link for order #99411',
+      status: 'Resolved by AI',
+      time: '2 mins ago',
+      confidence: 98,
+      duration: '42s',
+    },
+    {
+      id: 'CNV-8820',
+      customer: 'Elena Rostova',
+      company: 'Veloce Logistics',
+      query: 'Custom invoice receipt for VAT filing',
+      status: 'Resolved by AI',
+      time: '6 mins ago',
+      confidence: 95,
+      duration: '1m 10s',
+    },
+    {
+      id: 'CNV-8819',
+      customer: 'David Chen',
+      company: 'Kinetic Health',
+      query: 'Enterprise SLA terms for HIPAA storage',
+      status: 'Escalated',
+      time: '14 mins ago',
+      confidence: 84,
+      duration: '2m 04s',
+    },
+    {
+      id: 'CNV-8818',
+      customer: 'Chloe Bennett',
+      company: 'Atlas Design Co.',
+      query: 'How to invite teammates to shared workspace',
+      status: 'Resolved by AI',
+      time: '21 mins ago',
+      confidence: 99,
+      duration: '38s',
+    },
+    {
+      id: 'CNV-8817',
+      customer: 'Marcus Thorne',
+      company: 'Sentry Cloud',
+      query: 'Webhook retry policy on HTTP 504 timeouts',
+      status: 'Pending',
+      time: '29 mins ago',
+      confidence: 91,
+      duration: '1m 45s',
+    },
+  ],
+};
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: 'test-1',
+    quote: "Helmora answered 68% of our inbound ticket volume within the first week of rollout. Our tier-1 support backlog completely vanished before Monday morning.",
+    author: 'Devon Vance',
+    role: 'VP of Customer Experience',
+    company: 'Northwind Outfitters',
+    metric: '−62%',
+    metricLabel: 'first response time',
+    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'test-2',
+    quote: "The API actions are what sold us. Customers don't just want policy regurgitation—they want their shipping address updated and their invoice re-sent. Helmora does that safely.",
+    author: 'Samira Patel',
+    role: 'Director of Support Operations',
+    company: 'Brightlane Telecom',
+    metric: '74%',
+    metricLabel: 'tickets auto-resolved',
+    avatarUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'test-3',
+    quote: "Every other AI support bot we evaluated hallucinated pricing details or promised features we don't build. Helmora simply cites our docs and hands off when it isn't 100% sure.",
+    author: 'Marcus Lindholm',
+    role: 'Head of Global Support',
+    company: 'Krono Financial',
+    metric: '94.2%',
+    metricLabel: 'verified CSAT score',
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'test-4',
+    quote: "We scaled our active user base from 40k to 300k without adding a single tier-1 support headcount. Helmora paid for its entire annual contract in under 45 days.",
+    author: 'Aria Takahashi',
+    role: 'COO & Co-Founder',
+    company: 'Loomis Robotics',
+    metric: '4.8x',
+    metricLabel: 'ticket volume absorbed',
+    avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'test-5',
+    quote: "The seamless Zendesk handoff feels like magic. When our human reps open an escalated ticket, they already have a 3-bullet summary of what was attempted and why.",
+    author: 'Julian Becker',
+    role: 'Support Engineering Lead',
+    company: 'Prism Health',
+    metric: '1m 52s',
+    metricLabel: 'average resolution time',
+    avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'test-6',
+    quote: "Setting up our custom API actions took less than one afternoon. Helmora now queries our database and handles complex enterprise access requests without human intervention.",
+    author: 'Claire Montrose',
+    role: 'VP of Product',
+    company: 'Stratos Security',
+    metric: '99.8%',
+    metricLabel: 'accuracy rating',
+    avatarUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
+  },
+];
+
+export const FAQ_ITEMS: FAQItem[] = [
+  {
+    id: 'faq-1',
+    category: 'accuracy',
+    question: 'How does Helmora guarantee it will not hallucinate answers?',
+    answer: 'Helmora utilizes a proprietary dual-stage RAG architecture coupled with strict policy guardrails. The model is constrained to construct responses exclusively from retrieved document chunks. If the similarity confidence falls below your set threshold (default 92%), or if a user inquiry touches unverified claims, Helmora gracefully acknowledges the limitation and executes a warm handoff to your human support team.',
+  },
+  {
+    id: 'faq-2',
+    category: 'general',
+    question: 'How long does initial setup and knowledge ingestion take?',
+    answer: 'Most teams launch within 20 minutes. Simply connect your website URL or authenticate your Zendesk / Notion workspace. Helmora parses articles, strips noise, creates semantic vector embeddings, and builds an index ready for testing in our interactive sandbox.',
+  },
+  {
+    id: 'faq-3',
+    category: 'integrations',
+    question: 'What helpdesks and ticketing systems do you support?',
+    answer: 'Helmora integrates out-of-the-box with Zendesk Support, HubSpot Service Hub, Intercom, Freshdesk, Salesforce Service Cloud, Slack, and Jira Service Management. We also provide secure webhooks and custom REST endpoints for proprietary internal portals.',
+  },
+  {
+    id: 'faq-4',
+    category: 'general',
+    question: 'How does the human handoff process work?',
+    answer: 'When a handoff trigger fires (low confidence, negative sentiment, or explicit request), Helmora immediately opens or updates a ticket in your helpdesk with the complete conversation transcript, a 3-bullet AI summary of customer intent, and customer metadata, ensuring zero context is lost.',
+  },
+  {
+    id: 'faq-5',
+    category: 'general',
+    question: 'How does the Voice Agent (Beta) work?',
+    answer: 'Our Voice Agent runs on high-fidelity conversational speech models delivering sub-350ms latency. You can provision a dedicated toll-free or local phone number, or forward existing PBX phone lines directly to Helmora with human agent telephony transfer capabilities.',
+  },
+  {
+    id: 'faq-6',
+    category: 'pricing',
+    question: 'What happens if we exceed our monthly conversation limit?',
+    answer: 'We never cut off your customer support unexpectedly. If your volume surges during a campaign or seasonal event, additional conversations are billed at a predictable overage rate ($18 per 1,000 conversations) or you can add our Extra 5,000 Conversations booster pack at any time.',
+  },
+  {
+    id: 'faq-7',
+    category: 'accuracy',
+    question: 'Is customer conversation data used to train public AI models?',
+    answer: 'Never. Your data, tickets, and knowledge bases are strictly isolated in single-tenant customer partitions. We sign Business Associate Agreements (BAAs) and maintain strict zero-data-retention agreements with underlying foundational model providers. Helmora is SOC 2 Type II certified and GDPR compliant.',
+  },
+  {
+    id: 'faq-8',
+    category: 'integrations',
+    question: 'Can Helmora perform write actions like processing refunds or cancellations?',
+    answer: 'Yes. Through our Secure Action Connectors, you can authorize specific REST endpoints (e.g., Shopify, Stripe, Billing APIs). Actions require parameter validation, idempotency keys, and can be configured with optional human sign-off rules for transactions exceeding predefined monetary amounts.',
+  },
+];

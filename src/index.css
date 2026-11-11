@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-display);
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0E1A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e2640;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2b3658;
+  }
+}
+
+/* Signature Brand Gradients & Visual Utilities */
+.text-gradient {
+  background: linear-gradient(135deg, #7C5CFF 0%, #2EE6C5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(135deg, #FF7A59 0%, #FFA87D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-signature-gradient {
+  background: linear-gradient(135deg, #7C5CFF 0%, #2EE6C5 100%);
+}
+
+.border-signature-gradient {
+  border-image: linear-gradient(135deg, #7C5CFF, #2EE6C5) 1;
+}
+
+/* Subtle background noise texture simulation */
+.bg-grid-pattern {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+.bg-dots-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Shimmer sweep effect on buttons */
+@keyframes shimmerSweep {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(150%); }
+}
+
+.animate-shimmer-sweep {
+  animation: shimmerSweep 2.2s infinite;
+}
+
+/* Soft ambient glow animations */
+@keyframes pulseSlow {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 8s ease-in-out infinite;
+}
+
+/* Waveform bars for voice channel */
+@keyframes waveAnim {
+  0%, 100% { height: 8px; }
+  50% { height: 28px; }
+}
+
+.animate-waveform {
+  animation: waveAnim 1.2s ease-in-out infinite alternate;
+}
+
+/* Glass panel styling */
+.glass-panel {
+  background: rgba(17, 22, 39, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(22, 28, 48, 0.85);
+  border-color: rgba(124, 92, 255, 0.3);
+  box-shadow: 0 12px 30px -10px rgba(124, 92, 255, 0.15);
+}

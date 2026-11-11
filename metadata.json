@@ -1,0 +1,8 @@
+{
+  "name": "Helmora — AI Customer Support Platform",
+  "description": "Support that actually knows your business. Resolve 70% of support tickets with grounded AI, real API actions, and human handoff.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
